@@ -1,3 +1,8 @@
+
+import java.awt.*;
+import javax.swing.*;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +20,12 @@ public class welcome extends javax.swing.JFrame {
      */
     public welcome() {
         initComponents();
+        setSize(800, 550);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Happy Holidays");
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("logo.jpeg")).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
     }
 
     /**
@@ -26,31 +37,338 @@ public class welcome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        logo = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        reg_cust = new javax.swing.JMenu();
+        reg_host = new javax.swing.JMenu();
+        menu_book = new javax.swing.JMenu();
+        menu_rent = new javax.swing.JMenu();
+        menu_profile = new javax.swing.JMenu();
+        menu_logout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Welcome, login Sucessful");
+        jPanel1.setBackground(new java.awt.Color(188, 240, 236));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(675, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(238, Short.MAX_VALUE))
+        );
+
+        reg_cust.setText("Register As Customer");
+        reg_cust.addMenuKeyListener(new javax.swing.event.MenuKeyListener() {
+            public void menuKeyPressed(javax.swing.event.MenuKeyEvent evt) {
+                reg_custMenuKeyPressed(evt);
+            }
+            public void menuKeyReleased(javax.swing.event.MenuKeyEvent evt) {
+            }
+            public void menuKeyTyped(javax.swing.event.MenuKeyEvent evt) {
+            }
+        });
+        reg_cust.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                reg_custStateChanged(evt);
+            }
+        });
+        reg_cust.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                reg_custMenuSelected(evt);
+            }
+        });
+        reg_cust.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reg_custMouseClicked(evt);
+            }
+        });
+        reg_cust.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reg_custActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(reg_cust);
+
+        reg_host.setText("Register As Host");
+        reg_host.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                reg_hostStateChanged(evt);
+            }
+        });
+        reg_host.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                reg_hostMenuSelected(evt);
+            }
+        });
+        reg_host.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reg_hostMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(reg_host);
+
+        menu_book.setText("Book a Home");
+        menu_book.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                menu_bookStateChanged(evt);
+            }
+        });
+        menu_book.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menu_bookMenuSelected(evt);
+            }
+        });
+        menu_book.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_bookMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menu_book);
+
+        menu_rent.setText("Rent A Home");
+        menu_rent.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                menu_rentStateChanged(evt);
+            }
+        });
+        menu_rent.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menu_rentMenuSelected(evt);
+            }
+        });
+        menu_rent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_rentMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menu_rent);
+
+        menu_profile.setText("Update Profile");
+        menu_profile.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                menu_profileStateChanged(evt);
+            }
+        });
+        menu_profile.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menu_profileMenuSelected(evt);
+            }
+        });
+        menu_profile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_profileMouseClicked(evt);
+            }
+        });
+        menu_profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_profileActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menu_profile);
+
+        menu_logout.setText("LogOut");
+        menu_logout.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                menu_logoutStateChanged(evt);
+            }
+        });
+        menu_logout.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menu_logoutMenuSelected(evt);
+            }
+        });
+        menu_logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_logoutMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menu_logout);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(jLabel1)
-                .addContainerGap(153, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(136, 136, 136))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    int x =  Login_Form.special_person_id;
+    
+    private void menu_profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_profileActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_profileActionPerformed
+
+    private void menu_profileMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menu_profileMenuSelected
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_profileMenuSelected
+
+    private void reg_custMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_reg_custMenuSelected
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_reg_custMenuSelected
+
+    private void reg_hostMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_reg_hostMenuSelected
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_reg_hostMenuSelected
+
+    private void menu_bookMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menu_bookMenuSelected
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_bookMenuSelected
+
+    private void menu_rentMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menu_rentMenuSelected
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_rentMenuSelected
+
+    private void menu_logoutMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menu_logoutMenuSelected
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_logoutMenuSelected
+
+    private void reg_custActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reg_custActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reg_custActionPerformed
+
+    private void reg_custStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_reg_custStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reg_custStateChanged
+
+    private void reg_hostStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_reg_hostStateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_reg_hostStateChanged
+
+    private void menu_bookStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_menu_bookStateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_bookStateChanged
+
+    private void menu_rentStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_menu_rentStateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_rentStateChanged
+
+    private void menu_profileStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_menu_profileStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menu_profileStateChanged
+
+    private void menu_logoutStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_menu_logoutStateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_logoutStateChanged
+
+    private void reg_custMenuKeyPressed(javax.swing.event.MenuKeyEvent evt) {//GEN-FIRST:event_reg_custMenuKeyPressed
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_reg_custMenuKeyPressed
+
+    private void reg_custMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reg_custMouseClicked
+        // TODO add your handling code here:
+        if(Login_Form.special_account_type.equals("Customer")) {
+            this.setVisible(false);
+            new Reg_Customer().setVisible(true);
+         }
+         else {
+            JOptionPane.showMessageDialog(null, "You have not logged in Customer", "Access Denied", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_reg_custMouseClicked
+
+    private void reg_hostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reg_hostMouseClicked
+        // TODO add your handling code here:
+        if(Login_Form.special_account_type.equals("Host")) {
+            this.setVisible(false);
+            new Reg_Host().setVisible(true);
+         }
+         else {
+            JOptionPane.showMessageDialog(null, "You have not logged in as Host", "Access Denied", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_reg_hostMouseClicked
+
+    private void menu_bookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_bookMouseClicked
+        // TODO add your handling code here:
+        if(Login_Form.special_account_type.equals("Customer")) {
+            this.setVisible(false);
+            new Book_Home().setVisible(true);
+         }
+         else {
+            JOptionPane.showMessageDialog(null, "You have not logged in as Customer", "Access Denied", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_menu_bookMouseClicked
+
+    private void menu_rentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_rentMouseClicked
+        // TODO add your handling code here:
+        if(Login_Form.special_account_type.equals("Host")) {
+            this.setVisible(false);
+            new Rent_Home().setVisible(true);
+         }
+         else {
+            JOptionPane.showMessageDialog(null, "You have not logged in as Host", "Access Denied", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_menu_rentMouseClicked
+
+    private void menu_profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_profileMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+         new Update_Profile().setVisible(true);
+    }//GEN-LAST:event_menu_profileMouseClicked
+
+    private void menu_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_logoutMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Login_Form().setVisible(true);
+    }//GEN-LAST:event_menu_logoutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -88,6 +406,14 @@ public class welcome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel logo;
+    private javax.swing.JMenu menu_book;
+    private javax.swing.JMenu menu_logout;
+    private javax.swing.JMenu menu_profile;
+    private javax.swing.JMenu menu_rent;
+    private javax.swing.JMenu reg_cust;
+    private javax.swing.JMenu reg_host;
     // End of variables declaration//GEN-END:variables
 }
