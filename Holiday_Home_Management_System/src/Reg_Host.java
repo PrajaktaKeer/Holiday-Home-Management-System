@@ -1,11 +1,15 @@
 
 import java.awt.Image;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -54,6 +58,8 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
         txt_bank = new javax.swing.JTextField();
         txt_acc_type = new javax.swing.JComboBox<>();
         txt_acc_no = new javax.swing.JTextField();
+        alab = new javax.swing.JLabel();
+        nlab = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         menu_cust = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -93,35 +99,60 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
             }
         });
 
+        txt_bank.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_bankKeyReleased(evt);
+            }
+        });
+
         txt_acc_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Savings", "Current", "Null" }));
+
+        txt_acc_no.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_acc_noKeyReleased(evt);
+            }
+        });
+
+        alab.setForeground(new java.awt.Color(231, 20, 50));
+
+        nlab.setForeground(new java.awt.Color(231, 20, 50));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(142, 142, 142)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btn_reg1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(btn_clr, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
+                        .addContainerGap()
+                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_bank)
-                            .addComponent(txt_acc_type, 0, 247, Short.MAX_VALUE)
-                            .addComponent(txt_acc_no, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(144, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(txt_acc_type, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_bank, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(txt_acc_no, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(alab, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(nlab, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(btn_reg1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(btn_clr, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +163,20 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
                         .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_acc_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_bank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_acc_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(alab, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nlab, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_bank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,24 +255,39 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
 
     private void btn_reg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reg1ActionPerformed
         // TODO add your handling code here:
-        if(Login_Form.special_account_type.equals("Host")) {
-            String sql = "insert into host (pers_id, account_no, bank_name, account_type) values (" + x + ","+ txt_acc_no.getText() + ",'" + txt_bank.getText() + "','" + (String)txt_acc_type.getSelectedItem() + "')";
-
-            try {
-                Connection conn = MysqlConnect.ConnectDb();
-                Statement st = conn.createStatement();
-                st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Registration Successful");
+        String q1 = "select * from host where pers_id = " + Login_Form.special_person_id;
+        try {
+            Connection con = MysqlConnect.ConnectDb();
+            PreparedStatement ps = con.prepareStatement(q1);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next() != false ) {
+                JOptionPane.showMessageDialog(null, "You already have registered as a Host");
             }
-            catch(SQLException ex) {
-                System.out.println("Insert Error" + ex);
-            }
+            else {
+                if(Login_Form.special_account_type.equals("Host")) {
+                    String sql = "insert into host (pers_id, account_no, bank_name, account_type) values (" + x + ","+ txt_acc_no.getText() + ",'" + txt_bank.getText() + "','" + (String)txt_acc_type.getSelectedItem() + "')";
 
-            this.setVisible(false);
-            new welcome().setVisible(true);
+                    try {
+                        Connection conn = MysqlConnect.ConnectDb();
+                        Statement st = conn.createStatement();
+                        st.executeUpdate(sql);
+                        JOptionPane.showMessageDialog(null, "Registration Successful");
+                    }
+                    catch(SQLException ex) {
+                        System.out.println("Insert Error" + ex);
+                    }
+
+                    this.setVisible(false);
+                    new welcome().setVisible(true);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "You have not signed up as Host", "Access Denied", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
-        else {
-            JOptionPane.showMessageDialog(null, "You have not signed up as Host", "Access Denied", JOptionPane.ERROR_MESSAGE);
+        catch (SQLException e) {
+            // TODO Auto-generated catch block
+             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_btn_reg1ActionPerformed
 
@@ -276,8 +329,14 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
 
     private void menu_profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_profileMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
-         new Update_Profile().setVisible(true);
+        if(Login_Form.special_account_type.equals("Customer")) {
+            this.setVisible(false);
+            new Update_Profile().setVisible(true);
+         }
+         else {
+            this.setVisible(false);
+            new Update_Profile_Host().setVisible(true);
+        }
     }//GEN-LAST:event_menu_profileMouseClicked
 
     private void menu_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_logoutMouseClicked
@@ -285,6 +344,36 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
         this.setVisible(false);
         new Login_Form().setVisible(true);
     }//GEN-LAST:event_menu_logoutMouseClicked
+
+    private void txt_acc_noKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_acc_noKeyReleased
+        // TODO add your handling code here:
+        String acc_regax="^[0-9]{16}$";
+        Pattern pat=Pattern.compile(acc_regax);
+        Matcher match=pat.matcher(txt_acc_no.getText());
+        if(!match.matches())
+        {
+            alab.setText("Please Enter Valid Account Number");
+        }
+        else
+        {
+            alab.setText(" ");
+        }
+    }//GEN-LAST:event_txt_acc_noKeyReleased
+
+    private void txt_bankKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_bankKeyReleased
+        // TODO add your handling code here:
+        String fname_regax="^[A_Za-z]{1,20}$";
+        Pattern pat=Pattern.compile(fname_regax);
+        Matcher match=pat.matcher(txt_bank.getText());
+        if(!match.matches())
+        {
+            nlab.setText("Please Enter Valid Bank Name");
+        }
+        else
+        {
+            nlab.setText(" ");
+        }
+    }//GEN-LAST:event_txt_bankKeyReleased
 
     /**
      * @param args the command line arguments
@@ -322,6 +411,7 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel alab;
     private javax.swing.JButton btn_clr;
     private javax.swing.JButton btn_reg1;
     private javax.swing.JLabel jLabel13;
@@ -336,6 +426,7 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
     private javax.swing.JMenu menu_logout;
     private javax.swing.JMenu menu_profile;
     private javax.swing.JMenu menu_rent;
+    private javax.swing.JLabel nlab;
     private javax.swing.JTextField txt_acc_no;
     private javax.swing.JComboBox<String> txt_acc_type;
     private javax.swing.JTextField txt_bank;

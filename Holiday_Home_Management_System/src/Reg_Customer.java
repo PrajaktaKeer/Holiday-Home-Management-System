@@ -12,6 +12,9 @@
 import java.awt.*;
 import javax.swing.*;
 import java.sql.*;
+import net.proteanit.sql.DbUtils;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Reg_Customer extends javax.swing.JFrame {
 
@@ -50,6 +53,9 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
         txt_name_card = new javax.swing.JTextField();
         txt_account = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        clab = new javax.swing.JLabel();
+        nlab = new javax.swing.JLabel();
+        clab1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         menu_host = new javax.swing.JMenu();
@@ -92,72 +98,105 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
         txt_payment.setEditable(false);
         txt_payment.setText("Card Payment");
 
+        txt_name_card.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_name_cardKeyReleased(evt);
+            }
+        });
+
+        txt_account.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_accountActionPerformed(evt);
+            }
+        });
+        txt_account.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_accountKeyReleased(evt);
+            }
+        });
+
         jLabel14.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel14.setText("Customer Registration");
+
+        nlab.setForeground(new java.awt.Color(225, 23, 50));
+
+        clab1.setForeground(new java.awt.Color(225, 23, 50));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(182, 182, 182)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(131, 131, 131)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 22, Short.MAX_VALUE)))
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_name_card, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_account, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(153, Short.MAX_VALUE))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_account, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clab1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clab, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_reg, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txt_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_name_card, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(nlab, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(256, 256, 256)
-                .addComponent(btn_reg, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(173, 173, 173)
-                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(clab1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_account, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(clab)))
+                                .addGap(17, 17, 17)))
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_account, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_name_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_name_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(nlab, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_payment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_reg)
                     .addComponent(btn_clear))
-                .addGap(63, 63, 63))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         jMenu2.setText("Register As Customer");
@@ -209,7 +248,10 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,36 +260,6 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
-        // TODO add your handling code here:
-        txt_account.setText("");
-        txt_name_card.setText("");
-    }//GEN-LAST:event_btn_clearActionPerformed
-
-    private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
-        // TODO add your handling code here:
-        if(Login_Form.special_account_type.equals("Customer")) {
-            String sql = "insert into customer (person_id, name_on_card, card_no, payment_type) values (" + x + ",'"+ txt_name_card.getText() + "'," + txt_account.getText() + ",'" + txt_payment.getText() + "')";
-
-            try {
-                Connection conn = MysqlConnect.ConnectDb();
-                Statement st = conn.createStatement();
-                st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Registration Successful");
-            }
-            catch(SQLException ex) {
-                System.out.println("Insert Error" + ex);
-            }
-
-            //this.setVisible(false);
-            //new Login_Form().setVisible(true);
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "You have not signed up as Customer", "Access Denied", JOptionPane.ERROR_MESSAGE);
-
-        }
-    }//GEN-LAST:event_btn_regActionPerformed
 
     private void menu_hostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_hostMouseClicked
         // TODO add your handling code here:
@@ -287,8 +299,14 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
 
     private void menu_profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_profileMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
-         new Update_Profile().setVisible(true);
+        if(Login_Form.special_account_type.equals("Customer")) {
+            this.setVisible(false);
+            new Update_Profile().setVisible(true);
+         }
+         else {
+            this.setVisible(false);
+            new Update_Profile_Host().setVisible(true);
+        }
     }//GEN-LAST:event_menu_profileMouseClicked
 
     private void menu_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_logoutMouseClicked
@@ -296,6 +314,86 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
         this.setVisible(false);
         new Login_Form().setVisible(true);
     }//GEN-LAST:event_menu_logoutMouseClicked
+
+    private void txt_accountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_accountKeyReleased
+        // TODO add your handling code here:
+        String acc_regax="^[0-9]{16}$";
+        Pattern pat=Pattern.compile(acc_regax);
+        Matcher match=pat.matcher(txt_account.getText());
+        if(!match.matches())
+        {
+            clab1.setText("Please Enter Valid Card Number");
+        }
+        else
+        {
+            clab1.setText(" ");
+        }
+    }//GEN-LAST:event_txt_accountKeyReleased
+
+    private void txt_accountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_accountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_accountActionPerformed
+
+    private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
+        // TODO add your handling code here:
+        String q1 = "select * from customer where person_id = " + Login_Form.special_person_id;
+        try {
+            Connection con = MysqlConnect.ConnectDb();
+            PreparedStatement ps = con.prepareStatement(q1);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next() != false ) {
+                JOptionPane.showMessageDialog(null, "You already have registered as a Customer");
+            }
+            else {
+                if(Login_Form.special_account_type.equals("Customer")) {
+                    String sql = "insert into customer (person_id, name_on_card, card_no, payment_type) values (" + x + ",'"+ txt_name_card.getText() + "'," + txt_account.getText() + ",'" + txt_payment.getText() + "')";
+
+                    try {
+                        Connection conn = MysqlConnect.ConnectDb();
+                        Statement st = conn.createStatement();
+                        st.executeUpdate(sql);
+                        JOptionPane.showMessageDialog(null, "Registration Successful");
+                    }
+                    catch(SQLException ex) {
+                        System.out.println("Insert Error" + ex);
+                    }
+
+                    //this.setVisible(false);
+                    //new Login_Form().setVisible(true);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "You have not signed up as Customer", "Access Denied", JOptionPane.ERROR_MESSAGE);
+
+                }
+
+            }
+        }
+        catch (SQLException e) {
+            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btn_regActionPerformed
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        // TODO add your handling code here:
+        txt_account.setText("");
+        txt_name_card.setText("");
+    }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void txt_name_cardKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_name_cardKeyReleased
+        // TODO add your handling code here:
+        String fname_regax="^[A_Za-z]{3,20}$";
+        Pattern pat=Pattern.compile(fname_regax);
+        Matcher match=pat.matcher(txt_name_card.getText());
+        if(!match.matches())
+        {
+            nlab.setText("Please Enter Valid Card Name");
+        }
+        else
+        {
+            nlab.setText(" ");
+        }
+    }//GEN-LAST:event_txt_name_cardKeyReleased
 
     /**
      * @param args the command line arguments
@@ -335,6 +433,8 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_reg;
+    private javax.swing.JLabel clab;
+    private javax.swing.JLabel clab1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -348,6 +448,7 @@ logo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("log
     private javax.swing.JMenu menu_logout;
     private javax.swing.JMenu menu_profile;
     private javax.swing.JMenu menu_rent;
+    private javax.swing.JLabel nlab;
     private javax.swing.JTextField txt_account;
     private javax.swing.JTextField txt_name_card;
     private javax.swing.JTextField txt_payment;

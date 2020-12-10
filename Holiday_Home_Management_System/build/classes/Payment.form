@@ -44,43 +44,39 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="logo" min="-2" pref="136" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="logo" min="-2" pref="136" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel18" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel19" alignment="0" pref="180" max="32767" attributes="0"/>
-                                      <Component id="jLabel17" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel16" alignment="0" pref="180" max="32767" attributes="0"/>
-                                      <Component id="jLabel15" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txt_name" min="-2" pref="264" max="-2" attributes="0"/>
-                                      <Component id="txt_password" min="-2" pref="264" max="-2" attributes="0"/>
-                                      <Component id="txt_amount" alignment="0" min="-2" pref="264" max="-2" attributes="0"/>
-                                      <Component id="txt_house" min="-2" pref="264" max="-2" attributes="0"/>
-                                      <Component id="txt_card_no" min="-2" pref="264" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
-                                  <Component id="jLabel14" min="-2" pref="255" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel18" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel19" alignment="0" pref="180" max="32767" attributes="0"/>
+                              <Component id="jLabel17" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel16" alignment="0" pref="180" max="32767" attributes="0"/>
+                              <Component id="jLabel15" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txt_name" pref="264" max="32767" attributes="0"/>
+                              <Component id="txt_amount" alignment="0" pref="264" max="32767" attributes="0"/>
+                              <Component id="txt_house" pref="264" max="32767" attributes="0"/>
+                              <Component id="txt_card_no" pref="264" max="32767" attributes="0"/>
+                              <Component id="txt_password" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="jLabel14" min="-2" pref="255" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
                           <Component id="btn_pay" min="-2" pref="108" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jButton2" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="plab" pref="224" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="158" max="32767" attributes="0"/>
+                  <EmptySpace pref="117" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -122,12 +118,12 @@
                       <Component id="jLabel19" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="txt_password" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btn_pay" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="plab" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btn_pay" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="88" max="32767" attributes="0"/>
+                  <EmptySpace pref="97" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -194,17 +190,10 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_payActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Download Reciept"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="txt_name">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txt_password">
         </Component>
         <Component class="javax.swing.JTextField" name="txt_amount">
           <Properties>
@@ -220,6 +209,15 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="plab">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="17" green="29" red="ea" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txt_password">
         </Component>
       </SubComponents>
     </Container>

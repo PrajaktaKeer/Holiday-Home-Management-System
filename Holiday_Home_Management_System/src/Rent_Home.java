@@ -1,11 +1,16 @@
 
 import java.awt.Image;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -55,8 +60,8 @@ public class Rent_Home extends javax.swing.JFrame {
         txt_cost = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        txt_av_to = new datechooser.beans.DateChooserCombo();
         txt_av_from = new datechooser.beans.DateChooserCombo();
+        txt_av_to = new datechooser.beans.DateChooserCombo();
         txt_loc = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         check_kitchen = new javax.swing.JCheckBox();
@@ -197,17 +202,18 @@ public class Rent_Home extends javax.swing.JFrame {
                                             .addComponent(check_kitchen)
                                             .addComponent(check_air)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(63, 63, 63)
+                                        .addComponent(txt_av_from, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                                         .addComponent(jLabel18)
-                                        .addGap(41, 41, 41)
-                                        .addComponent(txt_av_to, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(32, 32, 32)
-                                        .addComponent(txt_av_from, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGap(42, 42, 42)
+                                        .addComponent(txt_av_to, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(44, 44, 44))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(168, 168, 168)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -219,16 +225,19 @@ public class Rent_Home extends javax.swing.JFrame {
                         .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_av_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_av_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txt_av_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_av_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -332,11 +341,12 @@ public class Rent_Home extends javax.swing.JFrame {
         int host_id = 0, house_id = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         
-        String sql_get = "select host_id from host where pers_id = " + Login_Form.special_person_id;
         
+        String sql_get = "select host_id from host where pers_id = " + Login_Form.special_person_id;
+        Connection con = MysqlConnect.ConnectDb();
         //extracting host id
         try {
-            Connection con = MysqlConnect.ConnectDb();
+            
             PreparedStatement ps = con.prepareStatement(sql_get);
             //ps.setInt(1, Login_Form.special_person_id);
             ResultSet rs = ps.executeQuery();
@@ -350,94 +360,112 @@ public class Rent_Home extends javax.swing.JFrame {
         System.out.println(host_id);
         //System.out.println(Login_Form.special_person_id);
         
-        String sql_ins = "insert into house(availablity_to, availablity_from, cost, img_file, host_id, location) values('" + sdf.format(txt_av_to.getSelectedDate().getTime()) + "','" + sdf.format(txt_av_from.getSelectedDate().getTime()) + "'," + txt_cost.getText() + ",'" + txt_img.getText() + "'," + host_id + ",'" + (String)txt_loc.getSelectedItem() + "')";
-        
-        //inserting into house table
-        try {
-            Connection conn = MysqlConnect.ConnectDb();
-            Statement st = conn.createStatement();
-            st.executeUpdate(sql_ins);
-            JOptionPane.showMessageDialog(null, "Registration Successful");
-        }
-        catch(SQLException ex) {
-            System.out.println("Insert Error" + ex);
-        }
-        
-        String sql_get_house = "select house_id from house where host_id = " + host_id + " order by house_id desc limit 1";
-        
-        //extracting house id
-        try {
-            Connection con = MysqlConnect.ConnectDb();
-            PreparedStatement ps = con.prepareStatement(sql_get_house);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
-                house_id = rs.getInt(1);
-            }
-        }
-        catch(SQLException ex) {
-            System.out.println("Login Error" + ex);
-        }
-        
-        //inserting into facilities table
-        String fac_name = ""; 
-        if(check_bed.isSelected() == true) {
-            fac_name = "Bed";
-            String sql_ins_fac = "insert into facilities(house_id, facility_name) values(" + house_id + ",'" + fac_name +"')";
-        
+        if(host_id != 0) {
+            String sql_ins = "insert into house(availablity_from, availablity_to, cost, img_file, host_id, location) values(?, ?, ?, ?, ?, ?)";
+            
+            
+            //inserting into house table
             try {
-                Connection conn = MysqlConnect.ConnectDb();
-                Statement st = conn.createStatement();
-                st.executeUpdate(sql_ins_fac);
-                //JOptionPane.showMessageDialog(null, "Registration Successful");
+                ///Connection conn = MysqlConnect.ConnectDb();
+                PreparedStatement ps1 = con.prepareStatement(sql_ins);
+                ps1.setString(1, sdf.format(txt_av_from.getSelectedDate().getTime()));
+                ps1.setString(2, sdf.format(txt_av_to.getSelectedDate().getTime()));
+                ps1.setInt(3, Integer.parseInt(txt_cost.getText()));
+                InputStream in = new FileInputStream(txt_img.getText());
+                ps1.setBlob(4, in);
+                ps1.setInt(5, host_id);
+                ps1.setString(6, (String)txt_loc.getSelectedItem());
+                
+                ps1.execute();
+                JOptionPane.showMessageDialog(null, "Registration Successful");
             }
             catch(SQLException ex) {
                 System.out.println("Insert Error" + ex);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Rent_Home.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        if(check_kitchen.isSelected() == true) {
-            fac_name = "Kitchen";
-            String sql_ins_fac = "insert into facilities(house_id, facility_name) values(" + house_id + ",'" + fac_name +"')";
-        
+
+            String sql_get_house = "select house_id from house where host_id = " + host_id + " order by house_id desc limit 1";
+
+            //extracting house id
             try {
-                Connection conn = MysqlConnect.ConnectDb();
-                Statement st = conn.createStatement();
-                st.executeUpdate(sql_ins_fac);
-                //JOptionPane.showMessageDialog(null, "Registration Successful");
+                //Connection con = MysqlConnect.ConnectDb();
+                PreparedStatement ps = con.prepareStatement(sql_get_house);
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()) {
+                    house_id = rs.getInt(1);
+                }
             }
             catch(SQLException ex) {
-                System.out.println("Insert Error" + ex);
+                System.out.println("Login Error" + ex);
             }
+
+            //inserting into facilities table
+            String fac_name = ""; 
+            if(check_bed.isSelected() == true) {
+                fac_name = "Bed";
+                String sql_ins_fac = "insert into facilities(house_id, facility_name) values(" + house_id + ",'" + fac_name +"')";
+
+                try {
+                    Connection conn = MysqlConnect.ConnectDb();
+                    Statement st = conn.createStatement();
+                    st.executeUpdate(sql_ins_fac);
+                    //JOptionPane.showMessageDialog(null, "Registration Successful");
+                }
+                catch(SQLException ex) {
+                    System.out.println("Insert Error" + ex);
+                }
+            }
+            if(check_kitchen.isSelected() == true) {
+                fac_name = "Kitchen";
+                String sql_ins_fac = "insert into facilities(house_id, facility_name) values(" + house_id + ",'" + fac_name +"')";
+
+                try {
+                    Connection conn = MysqlConnect.ConnectDb();
+                    Statement st = conn.createStatement();
+                    st.executeUpdate(sql_ins_fac);
+                    //JOptionPane.showMessageDialog(null, "Registration Successful");
+                }
+                catch(SQLException ex) {
+                    System.out.println("Insert Error" + ex);
+                }
+            }
+            if(check_hot_water.isSelected() == true) {
+                fac_name = "Hot Water System";
+                String sql_ins_fac = "insert into facilities(house_id, facility_name) values(" + house_id + ",'" + fac_name +"')";
+
+                try {
+                    Connection conn = MysqlConnect.ConnectDb();
+                    Statement st = conn.createStatement();
+                    st.executeUpdate(sql_ins_fac);
+                    //JOptionPane.showMessageDialog(null, "Registration Successful");
+                }
+                catch(SQLException ex) {
+                    System.out.println("Insert Error" + ex);
+                }
+            }
+            if(check_air.isSelected() == true) {
+                fac_name = "Air Conditioner";
+                String sql_ins_fac = "insert into facilities(house_id, facility_name) values(" + house_id + ",'" + fac_name +"')";
+
+                try {
+                    Connection conn = MysqlConnect.ConnectDb();
+                    Statement st = conn.createStatement();
+                    st.executeUpdate(sql_ins_fac);
+                    //JOptionPane.showMessageDialog(null, "Registration Successful");
+                }
+                catch(SQLException ex) {
+                    System.out.println("Insert Error" + ex);
+                }
+            }
+            this.setVisible(false);
+            new welcome().setVisible(true);
         }
-        if(check_hot_water.isSelected() == true) {
-            fac_name = "Hot Water System";
-            String sql_ins_fac = "insert into facilities(house_id, facility_name) values(" + house_id + ",'" + fac_name +"')";
-        
-            try {
-                Connection conn = MysqlConnect.ConnectDb();
-                Statement st = conn.createStatement();
-                st.executeUpdate(sql_ins_fac);
-                //JOptionPane.showMessageDialog(null, "Registration Successful");
-            }
-            catch(SQLException ex) {
-                System.out.println("Insert Error" + ex);
-            }
+        else {
+           JOptionPane.showMessageDialog(null, "You need to first register as a Host"); 
+           this.setVisible(false);
+            new Reg_Host().setVisible(true);
         }
-        if(check_air.isSelected() == true) {
-            fac_name = "Air Conditioner";
-            String sql_ins_fac = "insert into facilities(house_id, facility_name) values(" + house_id + ",'" + fac_name +"')";
-        
-            try {
-                Connection conn = MysqlConnect.ConnectDb();
-                Statement st = conn.createStatement();
-                st.executeUpdate(sql_ins_fac);
-                //JOptionPane.showMessageDialog(null, "Registration Successful");
-            }
-            catch(SQLException ex) {
-                System.out.println("Insert Error" + ex);
-            }
-        }
-        this.setVisible(false);
-        new welcome().setVisible(true);
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_locActionPerformed
@@ -491,8 +519,14 @@ public class Rent_Home extends javax.swing.JFrame {
 
     private void menu_profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_profileMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
-         new Update_Profile().setVisible(true);
+        if(Login_Form.special_account_type.equals("Customer")) {
+            this.setVisible(false);
+            new Update_Profile().setVisible(true);
+         }
+         else {
+            this.setVisible(false);
+            new Update_Profile_Host().setVisible(true);
+        }
     }//GEN-LAST:event_menu_profileMouseClicked
 
     private void menu_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_logoutMouseClicked
